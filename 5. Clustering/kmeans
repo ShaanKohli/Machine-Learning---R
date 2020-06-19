@@ -1,0 +1,38 @@
+df = read.csv("mcmenu.csv")
+
+attach(df)
+
+mcmenu_c = df[,c(2,3)]
+
+#name the rows with item names
+rownames(mcmenu_c)= df$Item
+mcmenu_c
+
+plot(mcmenu_c)
+
+#kmeans clustering
+km.2 = kmeans(mcmenu_c,2)   #2 clusters
+km.3 = kmeans(mcmenu_c,3)   #3 clusters
+km.4 = kmeans(mcmenu_c,4)   #4 clusters
+km.5 = kmeans(mcmenu_c,5)   #5 clusters
+
+#visualize the clusters
+plot(mcmenu_c, col=(km.2$cluster))
+plot(mcmenu_c, col=(km.3$cluster))
+plot(mcmenu_c, col=(km.4$cluster))
+plot(mcmenu_c, col=(km.5$cluster))
+
+#Animation of clustering
+install.packages("animation")
+library(animation)
+
+kmeans.ani(mcmenu_c, centers=5, pch=1:5, col=1:5)
+
+#output
+km.5
+
+#WCSS
+km.2$tot.withinss
+km.3$tot.withinss
+km.4$tot.withinss
+km.5$tot.withinss

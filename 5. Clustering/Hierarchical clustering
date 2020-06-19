@@ -1,0 +1,10 @@
+#Import the dataset using readr to avoid encoding conflicts
+mcmenu3 = mcmenu2[,c(2:3)]
+rownames(mcmenu3) = mcmenu2$Item
+
+hc= hclust(dist(mcmenu3))
+plot(hc, hang=1, cex=0.6)
+summary(hc)
+
+cutree(hc,2)
+cutree(hc,3)
